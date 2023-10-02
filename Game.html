@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    
+
+    <script>
+        function getComputerChoice(){
+            let computerOptions = ["Rock","Paper","Scissors"];
+            choice = Math.floor(Math.random()*computerOptions.length);
+            return computerOptions[choice].toUpperCase();
+        }
+        function getPlayerSelection(){
+            let playerOptions = prompt("Rock, Paper, Scissors?");
+            playerOptions = playerOptions.toUpperCase();
+            if(playerOptions === "ROCK" || playerOptions === "PAPER" || playerOptions === "SCISSORS"){
+                return playerOptions;
+            }else{
+                alert("Invalid choice");
+                return getPlayerSelection();
+            }
+
+        }
+        function gameTime (){
+            let score = 0;
+                for (let i = 0 ; i<5 ; i++){
+                    let player = getPlayerSelection();
+                    console.log("You chose: " + player);
+                    let computer = getComputerChoice();
+                    console.log("Computer chose: " + computer);
+                   if(computer==="ROCK"){
+                    switch(player){
+                        case "PAPER":
+                            score++;
+                            break;
+                        case "SCISSORS":
+                            score--;
+                    }
+                   }
+                   if(computer==="PAPER"){
+                    switch(player){
+                        case "SCISSORS":
+                            score++;
+                            break;
+                        case "ROCK":
+                            score--;
+                    }
+                   }
+                   if(computer==="SCISSORS"){
+                    switch(player){
+                        case "ROCK":
+                            score++;
+                            break;
+                        case "PAPER":
+                            score--;
+                    }
+                   }
+                   console.log("YOU: " + score + "\nCOMPUTER: " + (score*(-1)))
+            }
+            if (score < 0){
+                console.log("You lose!");
+            }else if(score > 0){
+                console.log("Yow win!");
+            }else{
+                console.log("Draw");
+            }
+
+
+        }
+       // let computerOptions = ["Rock","Paper","Scissors"];
+        //console.log(computerOptions.length)
+
+
+
+
+
+    </script>
+</body>
+</html>
