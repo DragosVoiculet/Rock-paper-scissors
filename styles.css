@@ -1,0 +1,39 @@
+body{ 
+    font-family: roboto, sans-serif;
+    background-color: blue;
+    display: flex;
+    flex-direction: column;
+}
+button{
+    background-color: red;
+    border-radius: 5%;
+    border: solid;
+    border-color: yellow;
+    color:yellow;
+    height: 50px;
+    width: 90px;
+    align-items: center;
+}
+button:active{
+    background-color: pink;
+}
+div {
+    color:yellow;
+    padding: 20px;
+    background-color: blueviolet;
+    font-size: 15px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+#container{
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+    margin: 50px;
+}
+#resultsContainer{
+    color:wheat;
+    background-color: darkblue;
+    padding: 30px;
+}

@@ -4,79 +4,99 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    
+    <div id = 'container'>
+    <button id = "rock">rock</button>
+    <button id = "paper">paper</button>
+    <button id = "scissors">scissors</button>
+    </div>
+    <div id = 'resultsContainer'>
+        <p id = 'playerResults'>Player results : </p>
+        <p id = 'computerResults'>Computer results : </p>
+
+
+    </div>
+
 
     <script>
+        let score = 0;
+        let playtime = 0;
+        let computerScore= 0;
+        let playerScore = 0;
+        const playerText = document.querySelector('#playerResults');
+        const computerText = document.querySelector('#computerResults');
+        const playerResults = document.createElement('span');
+        const computerResults = document.createElement('span');
+        const gameOverField = document.createElement('div');
+        document.body.appendChild(gameOverField);
+
+
+
+       // results.textContent = 'Your points: '
         function getComputerChoice(){
             let computerOptions = ["Rock","Paper","Scissors"];
             choice = Math.floor(Math.random()*computerOptions.length);
             return computerOptions[choice].toUpperCase();
         }
-        function getPlayerSelection(){
-            let playerOptions = prompt("Rock, Paper, Scissors?");
-            playerOptions = playerOptions.toUpperCase();
-            if(playerOptions === "ROCK" || playerOptions === "PAPER" || playerOptions === "SCISSORS"){
-                return playerOptions;
-            }else{
-                alert("Invalid choice");
-                return getPlayerSelection();
-            }
+        function singleRound(button){
+            const computerChoice = getComputerChoice();
+            const playerChoice = button.toUpperCase;
+            switch(button.toUpperCase()){
+                case 'ROCK':
+                    if(computerChoice==="PAPER"){
+                        computerScore++;
+                    }else if(computerChoice === "SCISSORS"){
+                        playerScore++;
+                    }
+                    break;
+                case 'PAPER':
+                    if(computerChoice==="SCISSORS"){
+                        computerScore++;
+                    }else if(computerChoice === "ROCK"){
+                        playerScore++;
+                    }
+                    break;
+                case 'SCISSORS':
+                    if(computerChoice==="ROCK"){
+                        computerScore++;
+                    }else if(computerChoice === "PAPER"){
+                        playerScore++;
+                    }
+                    break;
 
+            } 
         }
-        function gameTime (){
-            let score = 0;
-                for (let i = 0 ; i<5 ; i++){
-                    let player = getPlayerSelection();
-                    console.log("You chose: " + player);
-                    let computer = getComputerChoice();
-                    console.log("Computer chose: " + computer);
-                   if(computer==="ROCK"){
-                    switch(player){
-                        case "PAPER":
-                            score++;
-                            break;
-                        case "SCISSORS":
-                            score--;
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach((button)=>{
+                button.addEventListener('click', () =>{
+                    
+                    singleRound(button.id);
+                    playerResults.textContent = playerScore;
+                    playerText.appendChild(playerResults);
+                    computerResults.textContent = computerScore;
+                    computerText.appendChild(computerResults)
+                    
+                    if (computerScore === 5)
+                    {
+                        computerScore= 0;
+                        playerScore = 0;
+                        computerResults.textContent = 0;
+                        playerResults.textContent = 0;
+                        gameOverField.textContent = 'Game over, you lost';
+                    }else if(playerScore === 5)
+                    {
+                        computerScore= 0;
+                        playerScore = 0;
+                        computerResults.textContent = 0;
+                        playerResults.textContent = 0;
+                        gameOverField.textContent = 'Game over, you win';
                     }
-                   }
-                   if(computer==="PAPER"){
-                    switch(player){
-                        case "SCISSORS":
-                            score++;
-                            break;
-                        case "ROCK":
-                            score--;
-                    }
-                   }
-                   if(computer==="SCISSORS"){
-                    switch(player){
-                        case "ROCK":
-                            score++;
-                            break;
-                        case "PAPER":
-                            score--;
-                    }
-                   }
-                   console.log("YOU: " + score + "\nCOMPUTER: " + (score*(-1)))
-            }
-            if (score < 0){
-                console.log("You lose!");
-            }else if(score > 0){
-                console.log("Yow win!");
-            }else{
-                console.log("Draw");
-            }
 
 
-        }
-       // let computerOptions = ["Rock","Paper","Scissors"];
-        //console.log(computerOptions.length)
-
-
-
-
+                });
+            });
 
     </script>
 </body>
